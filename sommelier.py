@@ -78,14 +78,16 @@ def describe_dish_flavor(image_bytes, query):
 
 
 def search_wine(dish_flavor):
-    results = vectorstore.similarity_search(
+    # similarity_search_with_score를 사용하여 유사도 점수까지 가져오기
+    results_with_scores = vectorstore.similarity_search_with_score(
         dish_flavor,
         k=2
     )
 
     return {
         "dish_flavor": dish_flavor,
-        "wine_reviews": "\n\n".join([doc.page_content for doc in results])
+        "wine_reviews": "\n\n".join([doc.page_content for doc in results]),
+        "results_with_scores": results_with_scores  # 이 줄 추가
     }
 
 

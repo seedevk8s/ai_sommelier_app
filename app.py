@@ -28,7 +28,12 @@ with col1:
             with st.spinner("2단계: 요리에 어울리는 와인 리뷰를 검색하는 중..."):
                 wine_search_result = search_wine(dish_flavor) 
                 st.markdown("#### 🍷 와인 리뷰 검색 결과")
-                st.text(wine_search_result['wine_reviews'])
+                
+                # 유사도 점수와 함께 결과 표시
+                for i, (doc, score) in enumerate(wine_search_result['results_with_scores'], 1):
+                    st.markdown(f"**📊 와인 리뷰 {i} (유사도: {score:.4f})**")
+                    st.text(doc.page_content)
+                    st.markdown("---")                
 
             with st.spinner("3단계: AI 소믈리예가 와인 페어링에 대한 추천글을 생성하는 중..."):
                 wine_recommandation = recommand_wine({
