@@ -86,7 +86,7 @@ def search_wine(dish_flavor):
 
     return {
         "dish_flavor": dish_flavor,
-        "wine_reviews": "\n\n".join([doc.page_content for doc in results]),
+        "wine_reviews": "\n\n".join([doc.page_content for doc, score in results_with_scores]),
         "results_with_scores": results_with_scores  # 이 줄 추가
     }
 
